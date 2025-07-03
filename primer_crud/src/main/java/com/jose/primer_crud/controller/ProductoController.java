@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jose.primer_crud.dto.ProductoDTO;
 import com.jose.primer_crud.model.Producto;
 import com.jose.primer_crud.service.ProductoService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +34,12 @@ public class ProductoController {
     }
 
     @PostMapping()
-    public Producto crearProducto(@RequestBody Producto producto){
+    public Producto crearProducto(@Valid @RequestBody ProductoDTO productoDTO){
+        Producto producto = new Producto();
+        producto.setNombre(productoDTO.getNombre());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setEnStock(productoDTO.getEnStock());
         return productoService.crearProducto(producto);
-        
     }
 
     @DeleteMapping("/{id}")
