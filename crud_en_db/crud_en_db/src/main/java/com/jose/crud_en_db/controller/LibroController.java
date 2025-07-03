@@ -44,11 +44,11 @@ public class LibroController {
         libro.setAutor(libroDTO.getAutor());
         libro.setAnioPublicacion(libroDTO.getAnioPublicacion());
         libro.setDisponible(libroDTO.getDisponible());
-        return libro;
+        return libroService.crearLibro(libro);
     }
 
     //eliminar libro
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void eliminarLibro(Long id) {
         libroService.eliminarLibroPorId(id);
     }
