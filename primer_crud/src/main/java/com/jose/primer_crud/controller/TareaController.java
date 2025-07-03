@@ -11,6 +11,9 @@ import com.jose.primer_crud.service.TareaService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -27,6 +30,13 @@ public class TareaController {
     public List<Tarea> obtenerTareas() {
         return tareaService.listarTareas();
     }
+
+    @PostMapping()
+    public Tarea crearTarea(@RequestBody Tarea tarea) {
+        return tareaService.crearTarea(tarea);
+    }
+    
+    
     
     
 }
