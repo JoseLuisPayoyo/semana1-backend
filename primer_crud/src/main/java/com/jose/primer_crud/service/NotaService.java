@@ -16,4 +16,15 @@ public class NotaService {
     public List<Nota> listarNotas(){
         return notas;
     }
+
+    //crear nota
+    public Nota crearNota(Nota nota) {
+        notas.add(nota);
+        return nota;
+    }
+
+    //eliminar nota
+    public void eliminarNotaPorId(Long id) {
+        notas.removeIf(n -> n.getId().equals(id));
+    }
 }
