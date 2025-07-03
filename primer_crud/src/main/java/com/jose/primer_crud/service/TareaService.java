@@ -21,7 +21,7 @@ public class TareaService {
         return tarea;
     }
 
-    public void eliminarTarea(Long id) {
+    public void eliminarTareaPorId(Long id) {
         tareas.removeIf(t -> t.getId().equals(id));
     }
 
