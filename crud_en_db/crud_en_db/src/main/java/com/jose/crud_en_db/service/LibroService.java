@@ -2,6 +2,7 @@ package com.jose.crud_en_db.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,13 @@ public class LibroService {
                 .filter(l -> l.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    //solo los disponibles
+    public List<Libro> listarSoloDisponibles(){
+        return libros.stream()
+                        .filter(l -> l.isDisponible())
+                        .collect(Collectors.toList());
     }
 
 }
