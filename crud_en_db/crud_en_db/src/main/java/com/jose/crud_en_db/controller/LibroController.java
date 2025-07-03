@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jose.crud_en_db.dto.LibroDTO;
 import com.jose.crud_en_db.model.Libro;
 import com.jose.crud_en_db.service.LibroService;
 
@@ -37,8 +38,13 @@ public class LibroController {
 
     //crear libro
     @PostMapping()
-    public Libro crearLibro(@Valid @RequestBody Libro libro){
-        return libroService.crearLibro(libro);
+    public Libro crearLibro(@Valid @RequestBody LibroDTO libroDTO){
+        Libro libro = new Libro();
+        libro.setTitulo(libroDTO.getTitulo());
+        libro.setAutor(libroDTO.getAutor());
+        libro.setAnioPublicacion(libroDTO.getAnioPublicacion());
+        libro.setDisponible(libroDTO.getDisponible());
+        return libro;
     }
 
     //eliminar libro

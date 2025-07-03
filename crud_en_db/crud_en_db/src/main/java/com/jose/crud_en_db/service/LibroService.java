@@ -1,46 +1,45 @@
 package com.jose.crud_en_db.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jose.crud_en_db.model.Libro;
+import com.jose.crud_en_db.repository.LibroRepository;
 
 @Service
 public class LibroService {
     
-    private List<Libro> libros = new ArrayList<>();
+    @Autowired
+    private LibroRepository libroRepository;
 
     //listar libros
     public List<Libro> listarLibros(){
-        return libros;
+        return libroRepository.findAll();
     }
 
     //crear libros
     public Libro crearLibro(Libro libro){
-        libros.add(libro);
-        return libro;
+        return libroRepository.save(libro);
     }
 
     //eliminar libro
     public void eliminarLibroPorId(Long id){
-        libros.removeIf(l -> l.getId().equals(id));
+        libroRepository.deleteById(id);
     }
 
     //buscar por id
     public Libro buscarLibroPorId(Long id) {
-        return libros.stream()
-                .filter(l -> l.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return libroRepository.findById(id).orElse(null);
     }
 
     //solo los disponibles
     public List<Libro> listarSoloDisponibles(){
-        return libros.stream()
-                        .filter(l -> l.isDisponible())
+        return libroRepository.findAll()
+                        .stream()
+                        .filter(Libro::isDisponible)
                         .collect(Collectors.toList());
     }
 
