@@ -1,4 +1,4 @@
-package com.primer_crud.primer_crud;
+package com.jose.primer_crud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
