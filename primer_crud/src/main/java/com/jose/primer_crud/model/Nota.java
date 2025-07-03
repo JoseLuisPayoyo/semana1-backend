@@ -1,6 +1,5 @@
 package com.jose.primer_crud.model;
 
-
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,14 +14,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Tarea {
+public class Nota {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String titulo;
-    private String descripcion;
-    private boolean completada;
-
+    private String contenido;
+    private boolean importante;
+    
 }
