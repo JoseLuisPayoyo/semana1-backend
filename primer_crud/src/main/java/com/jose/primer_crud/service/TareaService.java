@@ -10,7 +10,7 @@ import com.jose.primer_crud.model.Tarea;
 @Service
 public class TareaService {
 
-    List<Tarea> tareas = new ArrayList<>();
+    private List<Tarea> tareas = new ArrayList<>();
 
     public List<Tarea> listarTareas() {
         return tareas;
@@ -21,8 +21,17 @@ public class TareaService {
         return tarea;
     }
 
-    public void eliminarTarea(Tarea tarea) {
-        tareas.remove(tarea);
+    public void eliminarTarea(Long id) {
+        tareas.removeIf(t -> t.getId().equals(id));
     }
+
+    public Tarea buscarPorId(Long id) {
+        return tareas.stream()
+            .filter(t -> t.getId().equals(id))
+            .findFirst()
+            .orElse(null);
+    }
+
+
     
 }
