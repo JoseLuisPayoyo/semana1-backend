@@ -1,8 +1,10 @@
 package com.jose.crus_dia2.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,14 +20,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pedidos {
+public class Pedido {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cliente;
-    private Date fecha;
+    private LocalDate fecha;
     private double total;
-    private String stado;
-    
+
+    @Enumerated(EnumType.STRING)
+    private EstadoPedido estado;
+
+    public enum EstadoPedido {
+        PENDIENTE, 
+        ENVIADO, 
+        CANCELADO
+    }
 }
