@@ -10,7 +10,7 @@ public interface IPedidoService {
 
     Pedido buscarPedidoPorId(Long id);
 
-    Pedido guardarPedido(Pedido pedido);
+    Pedido crearPedido(Pedido pedido);
 
     void eliminarPedido(Long id);
 }
