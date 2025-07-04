@@ -10,6 +10,7 @@ import com.jose.crus_dia2.exception.RecursoNoEncontradoException;
 import com.jose.crus_dia2.model.Pedido;
 import com.jose.crus_dia2.repository.PedidoRepository;
 
+
 @Service
 public class PedidoService implements IPedidoService{
 
@@ -39,15 +40,21 @@ public class PedidoService implements IPedidoService{
     }
 
     @Override
-    public Pedido actualizarPedido(Long id, PedidoDTO pedidoDTO) {
+    public Pedido editarPedido(Long id, PedidoDTO pedidoDTO) {
+        // 1. Verificar que el pedido existe
         Pedido pedidoExistente = pedidoRepository.findById(id)
-                .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
+            .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
+
+        // 2. Actualizar campos desde el DTO
         pedidoExistente.setCliente(pedidoDTO.getCliente());
         pedidoExistente.setFecha(pedidoDTO.getFecha());
         pedidoExistente.setTotal(pedidoDTO.getTotal());
         pedidoExistente.setEstado(pedidoDTO.getEstado());
-        
+
+        // 3. Guardar cambios
         return pedidoRepository.save(pedidoExistente);
     }
+
+
     
 }

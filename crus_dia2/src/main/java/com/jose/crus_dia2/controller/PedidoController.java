@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jose.crus_dia2.DTO.PedidoDTO;
+import com.jose.crus_dia2.mapper.PedidoMapper;
 import com.jose.crus_dia2.model.Pedido;
 import com.jose.crus_dia2.service.IPedidoService;
 
@@ -47,11 +48,7 @@ public class PedidoController {
     //crear
     @PostMapping
     public Pedido crearPedido(@Valid @RequestBody PedidoDTO pedidoDTO) {
-        Pedido pedido = new Pedido();
-        pedido.setCliente(pedidoDTO.getCliente());
-        pedido.setFecha(pedidoDTO.getFecha());
-        pedido.setTotal(pedidoDTO.getTotal());
-        pedido.setEstado(pedidoDTO.getEstado());
+        Pedido pedido = PedidoMapper.toEntity(pedidoDTO);
         return pedidoService.crearPedido(pedido);
     }
     
@@ -64,6 +61,8 @@ public class PedidoController {
     //editar
     @PutMapping("/editar/{id}")
     public Pedido editPedido(@PathVariable Long id, @Valid @RequestBody PedidoDTO pedidoDTO){
-        return pedidoService.actualizarPedido(id, pedidoDTO);
+        return pedidoService.editarPedido(id, pedidoDTO);
     }
+
+    
 }

@@ -15,5 +15,5 @@ public interface IPedidoService {
 
     void eliminarPedido(Long id);
 
-    Pedido actualizarPedido(Long id, PedidoDTO pedidoDTO);
+    Pedido editarPedido(Long id, PedidoDTO pedidoDTO);
 }
