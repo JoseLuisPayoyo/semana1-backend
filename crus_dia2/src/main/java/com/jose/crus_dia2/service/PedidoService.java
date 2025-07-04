@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jose.crus_dia2.DTO.PedidoDTO;
 import com.jose.crus_dia2.exception.RecursoNoEncontradoException;
 import com.jose.crus_dia2.model.Pedido;
 import com.jose.crus_dia2.repository.PedidoRepository;
@@ -35,6 +36,18 @@ public class PedidoService implements IPedidoService{
         pedidoRepository.findById(id)
                         .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
         pedidoRepository.deleteById(id);
+    }
+
+    @Override
+    public Pedido actualizarPedido(Long id, PedidoDTO pedidoDTO) {
+        Pedido pedidoExistente = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
+        pedidoExistente.setCliente(pedidoDTO.getCliente());
+        pedidoExistente.setFecha(pedidoDTO.getFecha());
+        pedidoExistente.setTotal(pedidoDTO.getTotal());
+        pedidoExistente.setEstado(pedidoDTO.getEstado());
+        
+        return pedidoRepository.save(pedidoExistente);
     }
     
 }
