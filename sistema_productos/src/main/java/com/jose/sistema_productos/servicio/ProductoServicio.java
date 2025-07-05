@@ -59,15 +59,33 @@ public class ProductoServicio implements IProductoServicio{
 
     @Override
     public ProductoDTO actualizarProducto(Long id, ProductoDTO productoDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarProducto'");
+        // 1. Buscar el producto existente
+        Producto producto = productoRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con id: " + id));
+
+        // 2. Buscar la nueva categoría
+        Categoria categoria = categoriaRepository.findById(productoDTO.getCategoriaId())
+            .orElseThrow(() -> new RecursoNoEncontradoException("No se ha encontrado la categoria con id: " + productoDTO.getCategoriaId()));
+            
+        // 3. Actualizar los campos del producto
+        producto.setNombre(productoDTO.getNombre());
+        producto.setPrecio(productoDTO.getPrecio());
+        producto.setStock(productoDTO.getStock());
+        producto.setCategoria(categoria);  
+
+        // 4. Guardar y devolver
+        Producto productoActualizado = productoRepository.save(producto);
+        return ProductoMapper.toDTO(productoActualizado);
     }
 
     @Override
     public void eliminarProducto(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarProducto'");
+        // 1. Verificar que el producto existe
+        productoRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("producto no encontrado con id: " + id));
+
+        // 2. Eliminarlo por ID
+        productoRepository.deleteById(id);
     }
-    
     
 }
