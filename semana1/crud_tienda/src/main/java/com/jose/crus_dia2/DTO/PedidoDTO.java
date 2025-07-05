@@ -2,10 +2,11 @@ package com.jose.crus_dia2.DTO;
 
 import java.time.LocalDate;
 
-import com.jose.crus_dia2.model.Pedido.EstadoPedido;
+import com.jose.crus_dia2.model.Pedido;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,15 +15,15 @@ import lombok.Setter;
 @Setter
 public class PedidoDTO {
     
-    @NotBlank(message = "El nombre del cliente no puede estar vacio")
-    private String cliente;
+    @NotNull(message = "El ID del cliente es obligatorio")
+    private Long clienteId; //
 
-    @NotNull(message = "La fecha no puede estar vacia")
+    @NotNull(message = "La fecha no puede estar vacía")
     private LocalDate fecha;
 
-    @Min(value = 0, message = "El total no puede ser menos a 0")
+    @Min(value = 0, message = "El total no puede ser menor a 0")
     private Double total;
 
-    @NotNull(message = "El estado no puede estar vacio")
-    private EstadoPedido estado;
+    @Enumerated(EnumType.STRING)
+    private Pedido.EstadoPedido estado;
 }

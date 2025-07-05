@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jose.crus_dia2.DTO.PedidoDTO;
 import com.jose.crus_dia2.exception.RecursoNoEncontradoException;
+import com.jose.crus_dia2.model.Cliente;
 import com.jose.crus_dia2.model.Pedido;
 import com.jose.crus_dia2.repository.PedidoRepository;
 
@@ -45,8 +46,11 @@ public class PedidoService implements IPedidoService{
         Pedido pedidoExistente = pedidoRepository.findById(id)
             .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
 
-        // 2. Actualizar campos desde el DTO
-        pedidoExistente.setCliente(pedidoDTO.getCliente());
+        // 2. Crear cliente con ID y actualizar campos
+        Cliente cliente = new Cliente();
+        cliente.setId(pedidoDTO.getClienteId());
+
+        pedidoExistente.setCliente(cliente);
         pedidoExistente.setFecha(pedidoDTO.getFecha());
         pedidoExistente.setTotal(pedidoDTO.getTotal());
         pedidoExistente.setEstado(pedidoDTO.getEstado());
@@ -54,6 +58,7 @@ public class PedidoService implements IPedidoService{
         // 3. Guardar cambios
         return pedidoRepository.save(pedidoExistente);
     }
+
 
 
     
