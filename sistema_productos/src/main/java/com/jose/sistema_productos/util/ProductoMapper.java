@@ -18,4 +18,15 @@ public class ProductoMapper {
         return producto;
     }
     
+    //convertir entity a dto
+    public static ProductoDTO toDTO(Producto producto) {
+        ProductoDTO productoDTO = new ProductoDTO();
+        productoDTO.setId(producto.getId());
+        productoDTO.setNombre(producto.getNombre());
+        productoDTO.setPrecio(producto.getPrecio());
+        productoDTO.setStock(producto.getStock());
+        productoDTO.setCategoriaId(producto.getCategoria().getId());
+
+        return productoDTO;
+    }
 }
