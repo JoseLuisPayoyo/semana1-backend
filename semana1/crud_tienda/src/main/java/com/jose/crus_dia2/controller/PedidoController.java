@@ -35,8 +35,8 @@ public class PedidoController {
 
     //listar
     @GetMapping()
-    public List<Pedido> listarPedidos(){
-        return pedidoService.listarPedidos();
+    public List<PedidoDTO> listarPedidos(){
+        return pedidoService.listarPedidosDTO();
     }
     
     //buscar por id

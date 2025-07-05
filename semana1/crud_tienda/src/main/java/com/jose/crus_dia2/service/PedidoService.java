@@ -1,12 +1,14 @@
 package com.jose.crus_dia2.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jose.crus_dia2.DTO.PedidoDTO;
 import com.jose.crus_dia2.exception.RecursoNoEncontradoException;
+import com.jose.crus_dia2.mapper.PedidoMapper;
 import com.jose.crus_dia2.model.Cliente;
 import com.jose.crus_dia2.model.Pedido;
 import com.jose.crus_dia2.repository.PedidoRepository;
@@ -57,6 +59,14 @@ public class PedidoService implements IPedidoService{
 
         // 3. Guardar cambios
         return pedidoRepository.save(pedidoExistente);
+    }
+
+    @Override
+    public List<PedidoDTO> listarPedidosDTO() {
+        return pedidoRepository.findAll()
+            .stream()
+            .map(PedidoMapper::toDTO)
+            .collect(Collectors.toList());
     }
 
 

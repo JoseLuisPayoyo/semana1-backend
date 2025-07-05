@@ -16,4 +16,6 @@ public interface IPedidoService {
     void eliminarPedido(Long id);
 
     Pedido editarPedido(Long id, PedidoDTO pedidoDTO);
+
+    List<PedidoDTO> listarPedidosDTO();
 }
