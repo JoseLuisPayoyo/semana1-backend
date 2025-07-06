@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jose.sistema_productos.dto.ProductoDTO;
 import com.jose.sistema_productos.exception.RecursoNoEncontradoException;
@@ -13,6 +14,7 @@ import com.jose.sistema_productos.repository.CategoriaRepository;
 import com.jose.sistema_productos.repository.ProductoRepository;
 import com.jose.sistema_productos.util.ProductoMapper;
 
+@Service
 public class ProductoServicio implements IProductoServicio{
 
     @Autowired

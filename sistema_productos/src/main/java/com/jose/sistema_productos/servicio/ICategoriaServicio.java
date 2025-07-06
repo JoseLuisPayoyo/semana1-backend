@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jose.sistema_productos.dto.CategoriaDTO;
 
+
 public interface ICategoriaServicio {
 
     List<CategoriaDTO> listarCategorias();

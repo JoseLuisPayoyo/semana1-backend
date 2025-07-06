@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 public class ProductoControlador {
 
     @Autowired
-    private IProductoServicio productoServicio;
+    IProductoServicio productoServicio;
 
     // 1. Listar todos los productos
     @GetMapping

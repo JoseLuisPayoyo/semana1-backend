@@ -14,7 +14,7 @@ import com.jose.sistema_productos.servicio.ICategoriaServicio;
 public class CategoriaControlador {
 
     @Autowired
-    private ICategoriaServicio categoriaServicio;
+    ICategoriaServicio categoriaServicio;
 
     // Listar todas las categorías
     @GetMapping
