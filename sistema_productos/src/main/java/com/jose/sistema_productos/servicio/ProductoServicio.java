@@ -42,7 +42,7 @@ public class ProductoServicio implements IProductoServicio{
 
 
     @Override
-    public ProductoDTO creaProducto(ProductoDTO productoDTO) {
+    public ProductoDTO crearProducto(ProductoDTO productoDTO) {
         //1. Buscar la categoria por ID
         Categoria categoria = categoriaRepository.findById(productoDTO.getCategoriaId())
             .orElseThrow(() -> new RecursoNoEncontradoException("Categoria no encontrda con id: " + productoDTO.getCategoriaId()));

@@ -10,7 +10,7 @@ public interface IProductoServicio {
 
     ProductoDTO obtenerProductoPorId(Long id);
 
-    ProductoDTO creaProducto(ProductoDTO productoDTO);
+    ProductoDTO crearProducto(ProductoDTO productoDTO);
 
     ProductoDTO actualizarProducto(Long id, ProductoDTO productoDTO);
 
