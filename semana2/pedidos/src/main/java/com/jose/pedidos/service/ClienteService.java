@@ -1,6 +1,7 @@
 package com.jose.pedidos.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,10 @@ public class ClienteService implements IClienteService{
 
     @Override
     public List<ClienteDTO> listarClientes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarClientes'");
+        return clienteRepository.findAll()
+            .stream()
+            .map(ClienteMapper::toDTO)
+            .collect(Collectors.toList());
     }
 
     @Override
