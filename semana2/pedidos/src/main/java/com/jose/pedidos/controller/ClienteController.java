@@ -3,6 +3,8 @@ package com.jose.pedidos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +32,11 @@ public class ClienteController {
 
     //crear cliente
     @PostMapping
-    public ClienteDTO guardarCliente(@Valid @RequestBody ClienteDTO clienteDTO){
-        return clienteService.guardarCliente(clienteDTO);
+    public ResponseEntity<ClienteDTO> guardarCliente(@Valid @RequestBody ClienteDTO clienteDTO) {
+        ClienteDTO guardado = clienteService.guardarCliente(clienteDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }
+
 
     //listar todos los clientes
     @GetMapping
@@ -51,8 +55,5 @@ public class ClienteController {
     public void eliminarCliente(@PathVariable Long id){
         clienteService.eliminarCliente(id);
     }
-    
-    
-    
     
 }
