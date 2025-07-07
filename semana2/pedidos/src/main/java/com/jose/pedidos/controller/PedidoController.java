@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
 @RestController
 @RequestMapping("/api/pedidos")
 @CrossOrigin(origins = "*")
@@ -54,5 +55,13 @@ public class PedidoController {
         pedidoService.eliminarPedido(id);
         return ResponseEntity.noContent().build();
     }
+
+    //listar pedidos de cada cliente
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<List<PedidoDTO>> listarPedidosPorCliente(@PathVariable Long id){
+        List<PedidoDTO> listaPedidos = pedidoService.listarPedidosPorCliente(id);
+        return ResponseEntity.ok(listaPedidos);
+    }
+    
     
 }
