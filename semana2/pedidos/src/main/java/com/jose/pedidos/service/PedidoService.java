@@ -1,11 +1,14 @@
 package com.jose.pedidos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jose.pedidos.dto.PedidoDTO;
+import com.jose.pedidos.model.Cliente;
+import com.jose.pedidos.model.Pedido;
 import com.jose.pedidos.repository.ClienteRepository;
 
 @Service
@@ -15,27 +18,15 @@ public class PedidoService implements IPedidoService{
     private ClienteRepository clienteRepository;
 
     @Override
-    public PedidoDTO guardarPedido(PedidoDTO pedidoDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardarPedido'");
-    }
+    public PedidoDTO guardarPedido(PedidoDTO pedidoDTO) {}
 
     @Override
-    public List<PedidoDTO> listarPedido() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarPedido'");
-    }
+    public List<PedidoDTO> listarPedido() {}
 
     @Override
-    public PedidoDTO buscarPedidoPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPedidoPorId'");
-    }
+    public PedidoDTO buscarPedidoPorId(Long id) {}
 
     @Override
-    public void eliminarPedido(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarPedido'");
-    }
+    public void eliminarPedido(Long id) {}
     
 }
