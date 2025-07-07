@@ -3,11 +3,14 @@ package com.jose.pedidos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jose.pedidos.dto.ClienteDTO;
 import com.jose.pedidos.dto.PedidoDTO;
 import com.jose.pedidos.service.PedidoService;
 
@@ -29,24 +32,28 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @PostMapping
-    public PedidoDTO guardarPedido(@Valid @RequestBody PedidoDTO pedidoDTO){
-        return pedidoService.guardarPedido(pedidoDTO);
+    public ResponseEntity<PedidoDTO> guardarPedido(@Valid @RequestBody PedidoDTO pedidoDTO){
+        PedidoDTO guardado = pedidoService.guardarPedido(pedidoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guardado);
     }
 
     @GetMapping
-    public List<PedidoDTO> listarPedidos(){
-        return pedidoService.listarPedido();
+    public ResponseEntity<List<PedidoDTO>> listarPedidos(){
+        List<PedidoDTO> lista = pedidoService.listarPedido();
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
-    public PedidoDTO buscarPedidoPorId(@PathVariable Long id){
-        return pedidoService.buscarPedidoPorId(id);
+    public ResponseEntity<PedidoDTO> buscarPedidoPorId(@PathVariable Long id){
+        PedidoDTO pedido = pedidoService.buscarPedidoPorId(id);
+        return ResponseEntity.ok(pedido);
     }
 
-    
+
     @DeleteMapping("/{id}")
-    public void eliminarPedido(@PathVariable Long id){
+    public ResponseEntity<Void> eliminarPedido(@PathVariable Long id){
         pedidoService.eliminarPedido(id);
+        return ResponseEntity.noContent().build();
     }
     
 }
