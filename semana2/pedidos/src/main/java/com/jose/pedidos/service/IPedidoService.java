@@ -13,4 +13,7 @@ public interface IPedidoService {
     PedidoDTO buscarPedidoPorId(Long id);
 
     void eliminarPedido(Long id);
+
+    List<PedidoDTO> listarPedidosPorCliente(Long clienteId);
+
 }

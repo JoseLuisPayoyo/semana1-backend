@@ -60,5 +60,13 @@ public class PedidoService implements IPedidoService{
         pedidoRepository.delete(pedido);
     }
 
+    @Override
+    public List<PedidoDTO> listarPedidosPorCliente(Long clienteId) {
+        return pedidoRepository.findByClienteId(clienteId)
+            .stream()
+            .map(PedidoMapper::toDTO)
+            .collect(Collectors.toList());
+    }
+
     
 }
