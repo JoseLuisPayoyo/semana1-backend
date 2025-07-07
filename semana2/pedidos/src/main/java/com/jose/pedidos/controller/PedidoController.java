@@ -43,6 +43,7 @@ public class PedidoController {
         return pedidoService.buscarPedidoPorId(id);
     }
 
+    
     @DeleteMapping("/{id}")
     public void eliminarPedido(@PathVariable Long id){
         pedidoService.eliminarPedido(id);
