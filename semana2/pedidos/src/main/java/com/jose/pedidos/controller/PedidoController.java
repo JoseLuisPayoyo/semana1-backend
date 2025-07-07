@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jose.pedidos.dto.ClienteDTO;
 import com.jose.pedidos.dto.PedidoDTO;
 import com.jose.pedidos.service.PedidoService;
 
