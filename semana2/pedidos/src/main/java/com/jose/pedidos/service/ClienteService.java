@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jose.pedidos.dto.ClienteDTO;
+import com.jose.pedidos.exception.RecursoNoEncontradoException;
 import com.jose.pedidos.model.Cliente;
 import com.jose.pedidos.repository.ClienteRepository;
 import com.jose.pedidos.util.ClienteMapper;
@@ -34,14 +35,17 @@ public class ClienteService implements IClienteService{
 
     @Override
     public ClienteDTO buscarClientePorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarClientePorId'");
+        Cliente cliente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con id: " + id));
+        return ClienteMapper.toDTO(cliente);
     }
 
     @Override
     public void eliminarCliente(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarCliente'");
+        Cliente cliente = clienteRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con id: " + id));
+    
+        clienteRepository.delete(cliente);
     }
     
 }
