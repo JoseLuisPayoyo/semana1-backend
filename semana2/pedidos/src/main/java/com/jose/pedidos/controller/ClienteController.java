@@ -40,20 +40,24 @@ public class ClienteController {
 
     //listar todos los clientes
     @GetMapping
-    public List<ClienteDTO> listarClientes(){
-        return clienteService.listarClientes();
+    public ResponseEntity<List<ClienteDTO>> listarClientes() {
+        List<ClienteDTO> lista = clienteService.listarClientes();
+        return ResponseEntity.ok(lista);
     }
+
 
     //buscar cliente por id
     @GetMapping("/{id}")
-    public ClienteDTO buscarClientePorId(@PathVariable Long id){
-        return clienteService.buscarClientePorId(id);
+    public ResponseEntity<ClienteDTO> buscarClientePorId(@PathVariable Long id){
+        ClienteDTO cliente = clienteService.buscarClientePorId(id);
+        return ResponseEntity.ok(cliente);
     }
 
     //eliminar cliente
     @DeleteMapping("/{id}")
-    public void eliminarCliente(@PathVariable Long id){
+    public ResponseEntity<Void> eliminarCliente(@PathVariable Long id){
         clienteService.eliminarCliente(id);
+        return ResponseEntity.noContent().build();
     }
     
 }
