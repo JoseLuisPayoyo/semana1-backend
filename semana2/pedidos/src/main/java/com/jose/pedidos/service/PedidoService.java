@@ -1,7 +1,6 @@
 package com.jose.pedidos.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.jose.pedidos.repository.PedidoRepository;
@@ -49,14 +48,16 @@ public class PedidoService implements IPedidoService{
 
     @Override
     public PedidoDTO buscarPedidoPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPedidoPorId'");
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
+        return PedidoMapper.toDTO(pedido);
     }
 
     @Override
     public void eliminarPedido(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarPedido'");
+        Pedido pedido = pedidoRepository.findById(id)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Pedido no encontrado con id: " + id));
+        pedidoRepository.delete(pedido);
     }
 
     
