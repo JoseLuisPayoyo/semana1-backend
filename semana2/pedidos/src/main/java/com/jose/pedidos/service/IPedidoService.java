@@ -16,4 +16,6 @@ public interface IPedidoService {
 
     List<PedidoDTO> listarPedidosPorCliente(Long clienteId);
 
+    List<PedidoDTO> listarPedidosPorClienteYEstado(Long clienteId, boolean enviado);
+
 }

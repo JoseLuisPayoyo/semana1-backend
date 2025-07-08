@@ -24,10 +24,6 @@ public class PedidoService implements IPedidoService{
     @Autowired
     private ClienteRepository clienteRepository;
 
-    // PedidoService(PedidoRepository pedidoRepository) {
-    //     this.pedidoRepository = pedidoRepository;
-    // }
-
     @Override
     public PedidoDTO guardarPedido(PedidoDTO pedidoDTO) {
         Cliente cliente = clienteRepository.findById(pedidoDTO.getClienteId())
@@ -63,6 +59,14 @@ public class PedidoService implements IPedidoService{
     @Override
     public List<PedidoDTO> listarPedidosPorCliente(Long clienteId) {
         return pedidoRepository.findByClienteId(clienteId)
+            .stream()
+            .map(PedidoMapper::toDTO)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PedidoDTO> listarPedidosPorClienteYEstado(Long clienteId, boolean enviado) {
+        return pedidoRepository.findByClienteIdAndEnviado(clienteId, enviado)
             .stream()
             .map(PedidoMapper::toDTO)
             .collect(Collectors.toList());
