@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -56,12 +58,22 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
-    //listar pedidos de cada cliente
+    //listar pedidos de cada cliente con filtro opcional por estado "enviado"
     @GetMapping("/cliente/{id}")
-    public ResponseEntity<List<PedidoDTO>> listarPedidosPorCliente(@PathVariable Long id){
-        List<PedidoDTO> listaPedidos = pedidoService.listarPedidosPorCliente(id);
-        return ResponseEntity.ok(listaPedidos);
+    public ResponseEntity<List<PedidoDTO>> listarPedidosPorCliente(
+        @PathVariable Long id,
+        @RequestParam(required = false) Boolean enviado){
+        if (enviado != null) {
+            List<PedidoDTO> listarPedidosPorEstado = pedidoService.listarPedidosPorClienteYEstado(id, enviado);
+            return ResponseEntity.ok(listarPedidosPorEstado);
+        }else{
+            List<PedidoDTO> listaPedidos = pedidoService.listarPedidosPorCliente(id);
+            return ResponseEntity.ok(listaPedidos);
+        }
+    
     }
+
+    
     
     
 }
