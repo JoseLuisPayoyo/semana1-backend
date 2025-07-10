@@ -1,6 +1,7 @@
 package com.payoyo.gestionusuarios.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,14 +30,16 @@ public class ProductoService implements IProductoService{
 
     @Override
     public List<ProductoResponseDTO> listarProductos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarProductos'");
+        return productoRepository.findAll()
+            .stream()
+            .map(ProductoMapper::toDto)
+            .collect(Collectors.toList());
     }
 
     @Override
     public ProductoResponseDTO obtenerProducto(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerProducto'");
+        //buscamos
+        
     }
 
     @Override
