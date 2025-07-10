@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.payoyo.gestionusuarios.dto.ProductoRequestDTO;
 import com.payoyo.gestionusuarios.dto.ProductoResponseDTO;
@@ -12,6 +13,7 @@ import com.payoyo.gestionusuarios.exception.RecursoNoEncontradoException;
 import com.payoyo.gestionusuarios.mapper.ProductoMapper;
 import com.payoyo.gestionusuarios.repository.ProductoRepository;
 
+@Service
 public class ProductoService implements IProductoService{
 
     @Autowired
