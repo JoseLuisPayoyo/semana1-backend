@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jose</groupId>
-	<artifactId>security_jwt</artifactId>
+	<artifactId>securuty_jwt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>security_jwt</name>
+	<name>securuty_jwt</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -54,8 +54,8 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
