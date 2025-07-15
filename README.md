@@ -10,7 +10,7 @@ El objetivo es dominar desde la base hasta proyectos reales, aplicando buenas pr
 | Semana | Tema principal                                                 | Estado |
 |--------|----------------------------------------------------------------|--------|
 | 1      | CRUD avanzado con Spring Boot, DTOs, validaciones, excepciones| ✅     |
-| 2      | Relaciones JPA (`@ManyToOne`, `@OneToMany`), mapeo bidireccional | ⬜     |
+| 2      | Relaciones JPA (`@ManyToOne`, `@OneToMany`), mapeo bidireccional | ✅     |
 | 3      | Mappers avanzados, lógica compleja en servicios, refactorización | ⬜     |
 | 4      | Seguridad con Spring Security + JWT (login, registro, roles)  | ⬜     |
 | 5      | Autorización basada en roles + protección de endpoints        | ⬜     |
