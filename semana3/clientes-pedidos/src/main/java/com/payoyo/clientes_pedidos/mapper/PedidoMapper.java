@@ -1,7 +1,6 @@
 package com.payoyo.clientes_pedidos.mapper;
 
 import com.payoyo.clientes_pedidos.dto.PedidoDTO;
-import com.payoyo.clientes_pedidos.model.Cliente;
 import com.payoyo.clientes_pedidos.model.Pedido;
 
 public class PedidoMapper {
