@@ -1,12 +1,15 @@
 package com.payoyo.clientes_pedidos.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.payoyo.clientes_pedidos.dto.ClienteDTO;
 import com.payoyo.clientes_pedidos.dto.PedidoDTO;
+import com.payoyo.clientes_pedidos.exception.RecursoNoEncontradoException;
 import com.payoyo.clientes_pedidos.mapper.ClienteMapper;
 import com.payoyo.clientes_pedidos.mapper.PedidoMapper;
 import com.payoyo.clientes_pedidos.model.Cliente;
@@ -40,16 +43,27 @@ public class ClienteService implements IClienteService{
     }
 
     public PedidoDTO agregarPedido(Long clienteId, PedidoDTO dto) {
-    Cliente cliente = clienteRepository.findWithPedidosById(clienteId)
-        .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        Cliente cliente = clienteRepository.findWithPedidosById(clienteId)
+            .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-    Pedido pedido = pedidoMapper.toEntity(dto);
-    cliente.addPedido(pedido);
+        Pedido pedido = pedidoMapper.toEntity(dto);
+        cliente.addPedido(pedido);
 
-    clienteRepository.save(cliente); 
+        clienteRepository.save(cliente); 
 
-    return pedidoMapper.toDTO(pedido);
-}
+        return pedidoMapper.toDTO(pedido);
+    }
+
+    @Override
+    public List<PedidoDTO> obtenerPedidosDeCliente(Long clienteId) {
+        Cliente cliente = clienteRepository.findWithPedidosById(clienteId)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con id: " + clienteId));
+
+        return cliente.getPedidos()
+            .stream()
+            .map(pedidoMapper::toDTO)
+            .collect(Collectors.toList());    
+    }
 
 
     

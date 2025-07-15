@@ -1,5 +1,6 @@
 package com.payoyo.clientes_pedidos.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.payoyo.clientes_pedidos.dto.ClienteDTO;
@@ -12,5 +13,7 @@ public interface IClienteService {
     Optional<ClienteDTO> obtenerCliente(Long id);
 
     PedidoDTO agregarPedido(Long clienteId, PedidoDTO pedidoDTO);
+
+    List<PedidoDTO> obtenerPedidosDeCliente(Long clienteId);
     
 }

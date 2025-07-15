@@ -1,5 +1,6 @@
 package com.payoyo.clientes_pedidos.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,12 @@ public class ClienteController {
         PedidoDTO creado = clienteService.agregarPedido(id, pedidoDTO);
         return ResponseEntity.ok(creado);
     }
+
+    //listar pedidos de un cliente
+    @GetMapping("/{id}/pedidos")
+    public ResponseEntity<List<PedidoDTO>> obtenerPedidos(@PathVariable Long id) {
+        List<PedidoDTO> pedidos = clienteService.obtenerPedidosDeCliente(id);
+        return ResponseEntity.ok(pedidos);
+    }
+
 }
