@@ -31,7 +31,7 @@ public class ClienteService implements IClienteService{
 
     @Override
     public Optional<ClienteDTO> obtenerCliente(Long id) {
-        return clienteRepository.findById(id)
+        return clienteRepository.findWithPedidosById(id)
             .map(clienteMapper::toDTO);
     }
     
