@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,16 @@ public class ClienteController {
     public ResponseEntity<List<PedidoDTO>> obtenerPedidos(@PathVariable Long id) {
         List<PedidoDTO> pedidos = clienteService.obtenerPedidosDeCliente(id);
         return ResponseEntity.ok(pedidos);
+    }
+
+    //eliminar pedido por cliente
+    @DeleteMapping("/{clienteId}/pedidos/{pedidoId}")
+    public ResponseEntity<Void> eliminarPedido(
+        @PathVariable Long clienteId,
+        @PathVariable Long pedidoId
+    ){
+        clienteService.eliminarPedidoDeCliente(clienteId, pedidoId);
+        return ResponseEntity.noContent().build();
     }
 
 }

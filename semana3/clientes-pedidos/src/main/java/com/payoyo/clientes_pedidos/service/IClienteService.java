@@ -15,5 +15,7 @@ public interface IClienteService {
     PedidoDTO agregarPedido(Long clienteId, PedidoDTO pedidoDTO);
 
     List<PedidoDTO> obtenerPedidosDeCliente(Long clienteId);
+
+    void eliminarPedidoDeCliente(Long clienteId, Long pedidoId);
     
 }

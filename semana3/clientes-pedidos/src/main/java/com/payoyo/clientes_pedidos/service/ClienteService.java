@@ -65,6 +65,21 @@ public class ClienteService implements IClienteService{
             .collect(Collectors.toList());    
     }
 
+    @Override
+    public void eliminarPedidoDeCliente(Long clienteId, Long pedidoId) {
+        Cliente cliente = clienteRepository.findWithPedidosById(clienteId)
+            .orElseThrow(() -> new RecursoNoEncontradoException("Cliente no encontrado con id: " + clienteId));
+        
+        Pedido pedidoAEliminar = cliente.getPedidos().stream()
+            .filter(p -> p.getId().equals(pedidoId))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        cliente.removePedido(pedidoAEliminar); // actualiza la relación y marca el pedido como huérfano
+
+        clienteRepository.save(cliente); // por orphanRemoval, el pedido se elimina
+    }
+
 
     
     
