@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.payoyo.clientes_pedidos.dto.ClienteDTO;
+import com.payoyo.clientes_pedidos.dto.PedidoDTO;
 import com.payoyo.clientes_pedidos.mapper.ClienteMapper;
+import com.payoyo.clientes_pedidos.mapper.PedidoMapper;
 import com.payoyo.clientes_pedidos.model.Cliente;
+import com.payoyo.clientes_pedidos.model.Pedido;
 import com.payoyo.clientes_pedidos.repository.ClienteRepository;
 
 @Service
@@ -17,6 +20,7 @@ public class ClienteService implements IClienteService{
     private ClienteRepository clienteRepository;
 
     private final ClienteMapper clienteMapper = new ClienteMapper();
+    private final PedidoMapper pedidoMapper = new PedidoMapper();
 
     @Override
     public ClienteDTO crearCliente(ClienteDTO clienteDTO) {
@@ -34,5 +38,20 @@ public class ClienteService implements IClienteService{
         return clienteRepository.findWithPedidosById(id)
             .map(clienteMapper::toDTO);
     }
+
+    public PedidoDTO agregarPedido(Long clienteId, PedidoDTO dto) {
+    Cliente cliente = clienteRepository.findWithPedidosById(clienteId)
+        .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+    Pedido pedido = pedidoMapper.toEntity(dto);
+    cliente.addPedido(pedido);
+
+    clienteRepository.save(cliente); 
+
+    return pedidoMapper.toDTO(pedido);
+}
+
+
+    
     
 }

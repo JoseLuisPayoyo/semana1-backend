@@ -37,4 +37,15 @@ public class Cliente {
     @JsonIgnoreProperties("cliente")
     private List<Pedido> pedidos = new ArrayList<>();
     
+
+    public void addPedido(Pedido pedido) {
+        pedidos.add(pedido);
+        pedido.setCliente(this);
+    }
+
+    public void removePedido(Pedido pedido) {
+        pedidos.remove(pedido);
+        pedido.setCliente(null);
+    }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.payoyo.clientes_pedidos.dto.ClienteDTO;
+import com.payoyo.clientes_pedidos.dto.PedidoDTO;
 import com.payoyo.clientes_pedidos.service.IClienteService;
 
 @RestController
@@ -32,5 +33,12 @@ public class ClienteController {
         Optional<ClienteDTO> cliente = clienteService.obtenerCliente(id);
         return cliente.map(ResponseEntity::ok)
                       .orElse(ResponseEntity.notFound().build());
+    }
+
+    //agregar pedidos a un cliente existente
+    @PostMapping("/{id}/pedidos")
+    public ResponseEntity<PedidoDTO> agregarPedidos(@PathVariable Long id, @RequestBody PedidoDTO pedidoDTO){
+        PedidoDTO creado = clienteService.agregarPedido(id, pedidoDTO);
+        return ResponseEntity.ok(creado);
     }
 }
