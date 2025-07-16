@@ -1,5 +1,6 @@
 package com.payoyo.gestion_ferreteria.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +23,19 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private Double precio;
+
+    @Column(nullable = false)
     private Integer stock;
+
+    @Column(nullable = false)
     private String categoria;
-    private Boolean activo;
+
+    private Boolean activo = true;
     
     
 }
