@@ -6,7 +6,7 @@ import com.payoyo.gestion_ferreteria.model.Producto;
 
 public class ProductoMapper {
     
-    public static Producto toEntity(CreateProductoDTO dto){
+    public Producto toEntity(CreateProductoDTO dto){
         Producto producto = new Producto();
         
         producto.setNombre(dto.getNombre());
@@ -18,7 +18,7 @@ public class ProductoMapper {
         return producto;
     }
 
-    public static ProductoResponseDTO toDTO(Producto producto) {
+    public ProductoResponseDTO toDTO(Producto producto) {
         return new ProductoResponseDTO(
             producto.getId(),
             producto.getNombre(),

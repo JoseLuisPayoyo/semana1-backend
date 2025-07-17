@@ -16,21 +16,24 @@ import com.payoyo.gestion_ferreteria.repository.ProductoRepository;
 public class ProductoServiceImpl implements IProductoService{
 
     private final ProductoRepository productoRepository;
-    public ProductoServiceImpl(ProductoRepository productoRepository) {
+    private final ProductoMapper productoMapper;
+
+    public ProductoServiceImpl(ProductoRepository productoRepository, ProductoMapper productoMapper) {
         this.productoRepository = productoRepository;
+        this.productoMapper = productoMapper;
     }
 
     //Crear producto
     @Override
     public ProductoResponseDTO crear(CreateProductoDTO dto) {
         // cambiamos a entidad
-        Producto producto = ProductoMapper.toEntity(dto);
+        Producto producto = productoMapper.toEntity(dto);
 
         //guardamos en la db
         Producto guardado = productoRepository.save(producto);
 
         //devolvemos entidad
-        return ProductoMapper.toDTO(guardado);
+        return productoMapper.toDTO(guardado);
 
     }
 
@@ -39,7 +42,7 @@ public class ProductoServiceImpl implements IProductoService{
     public List<ProductoResponseDTO> buscarTodos() {
         return productoRepository.findAll()
             .stream()
-            .map(ProductoMapper::toDTO)
+            .map(productoMapper::toDTO)
             .collect(Collectors.toList());
     }
 
@@ -49,7 +52,7 @@ public class ProductoServiceImpl implements IProductoService{
         Producto producto = productoRepository.findById(id)
             .orElseThrow(() -> new ProductoNoEncontradoException(id));
         
-        return ProductoMapper.toDTO(producto);
+        return productoMapper.toDTO(producto);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class ProductoServiceImpl implements IProductoService{
         productoExistente.setStock(dto.getStock());
 
         Producto actualizado = productoRepository.save(productoExistente);
-        return ProductoMapper.toDTO(actualizado);
+        return productoMapper.toDTO(actualizado);
     }
     
 }
