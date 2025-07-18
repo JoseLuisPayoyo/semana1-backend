@@ -13,7 +13,7 @@ public interface IProductoService {
 
     ProductoResponseDTO obtenerPorId(Long id);
 
-    void eliminar(Long id);
+    ProductoResponseDTO eliminar(Long id);
 
     ProductoResponseDTO actualizar(Long id, CreateProductoDTO dto);
     

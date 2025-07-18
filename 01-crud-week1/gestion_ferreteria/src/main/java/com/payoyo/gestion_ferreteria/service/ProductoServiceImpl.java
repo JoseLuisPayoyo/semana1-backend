@@ -55,13 +55,15 @@ public class ProductoServiceImpl implements IProductoService{
         return productoMapper.toDTO(producto);
     }
 
-    @Override
-    public void eliminar(Long id) {
+    public ProductoResponseDTO eliminar(Long id) {
         Producto producto = productoRepository.findById(id)
             .orElseThrow(() -> new ProductoNoEncontradoException(id));
 
-        productoRepository.delete(producto);    
+        producto.setActivo(false);
+        Producto actualizado = productoRepository.save(producto);
+        return productoMapper.toDTO(actualizado);
     }
+
 
     @Override
     public ProductoResponseDTO actualizar(Long id, CreateProductoDTO dto) {
