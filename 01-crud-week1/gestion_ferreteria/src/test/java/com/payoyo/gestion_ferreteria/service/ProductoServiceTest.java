@@ -1,6 +1,7 @@
 package com.payoyo.gestion_ferreteria.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.payoyo.gestion_ferreteria.dto.ProductoResponseDTO;
+import com.payoyo.gestion_ferreteria.exception.ProductoNoEncontradoException;
 import com.payoyo.gestion_ferreteria.model.Producto; 
 import com.payoyo.gestion_ferreteria.mapper.ProductoMapper;
 import com.payoyo.gestion_ferreteria.repository.ProductoRepository;
@@ -114,5 +116,18 @@ public class ProductoServiceTest {
 
         verify(productoRepository).findById(id);
         verify(productoMapper).toDTO(producto);
+    }
+
+    @Test
+    void buscarPorIdNoExiste(){
+        Long id = 99L;
+
+        when(productoRepository.findById(id)).thenReturn(Optional.empty());
+
+        // WHEN & THEN
+        assertThatThrownBy(() -> productoService.obtenerPorId(id))
+            .isInstanceOf(ProductoNoEncontradoException.class)
+            .hasMessageContaining("No se encontro ningún producto con ID: 99");
+
     }
 }
