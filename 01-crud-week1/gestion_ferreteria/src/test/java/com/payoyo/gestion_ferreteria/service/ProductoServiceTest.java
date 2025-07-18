@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,5 +83,36 @@ public class ProductoServiceTest {
         verify(productoRepository).findAll();
         verify(productoMapper).toDTO(producto1);
         verify(productoMapper).toDTO(producto2);
+    }
+
+    @Test
+    void textBuscarPorIdExiste(){
+        Long id = 1L;
+
+        Producto producto = new Producto();
+        producto.setId(id);
+        producto.setNombre("Martillo");
+
+        ProductoResponseDTO productoDTO = new ProductoResponseDTO(
+            id,
+            "Martillo",
+            null,
+            null,
+            null,
+            null
+        );
+
+        when(productoRepository.findById(id)).thenReturn(Optional.of(producto));
+        when(productoMapper.toDTO(producto)).thenReturn(productoDTO);
+
+        //WHEN
+        ProductoResponseDTO resultado = productoService.obtenerPorId(id);
+
+        //THEN
+        assertThat(resultado).isNotNull();
+        assertThat(resultado).isEqualTo(productoDTO);
+
+        verify(productoRepository).findById(id);
+        verify(productoMapper).toDTO(producto);
     }
 }
