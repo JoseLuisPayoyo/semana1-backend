@@ -1,9 +1,11 @@
 package com.payoyo.gestion_ferreteria.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.payoyo.gestion_ferreteria.dto.CreateProductoDTO;
 import com.payoyo.gestion_ferreteria.dto.ProductoResponseDTO;
 import com.payoyo.gestion_ferreteria.model.Producto;
-
+@Component
 public class ProductoMapper {
     
     public Producto toEntity(CreateProductoDTO dto){
