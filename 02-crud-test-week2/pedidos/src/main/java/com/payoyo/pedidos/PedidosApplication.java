@@ -1,13 +1,13 @@
-package com.payoyo.cliente_pedidos;
+package com.payoyo.pedidos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ClientePedidosApplication {
+public class PedidosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClientePedidosApplication.class, args);
+		SpringApplication.run(PedidosApplication.class, args);
 	}
 
 }
